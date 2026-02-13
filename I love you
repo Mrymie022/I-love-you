@@ -1,0 +1,60 @@
+<div style="text-align:center; margin-top:80px; font-family:Arial;">
+  <h2 id="countdown"></h2>
+  <h1 id="message" style="font-size:40px;"></h1>
+</div>
+
+<style>
+body {
+  background: #ffe6f0;
+  overflow: hidden;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 24px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+</style>
+
+<script>
+let targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
+
+let timer = setInterval(function() {
+
+  let now = new Date().getTime();
+  let distance = targetDate - now;
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML =
+    "💘 " + days + " يوم " + hours + " ساعة " + minutes + " دقيقة " + seconds + " ثانية 💘";
+
+  if (distance <= 0) {
+    clearInterval(timer);
+    document.getElementById("countdown").innerHTML = "";
+    document.getElementById("message").innerHTML = "احبك ❤️💋✨";
+  }
+
+}, 1000);
+
+// قلوب تطلع كل شوي
+setInterval(function() {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💗";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => { heart.remove(); }, 6000);
+}, 500);
+</script>
